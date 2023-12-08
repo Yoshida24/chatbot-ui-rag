@@ -11,6 +11,9 @@ import { Tiktoken, init } from '@dqbd/tiktoken/lite/init';
 
 export const config = {
   runtime: 'edge',
+  unstable_allowDynamic: [
+    '/node_modules/@pinecone-database/pinecone/**', // use a glob to allow anything in the function-bind 3rd party module
+  ],
 };
 
 const apiKey = process.env.PINECONE_API_KEY;
