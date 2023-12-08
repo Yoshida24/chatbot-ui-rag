@@ -1,5 +1,5 @@
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE, OPENAI_API_HOST } from '@/utils/app/const';
-import { OpenAIError, OpenAIStream } from '@/utils/server';
+import { OpenAIError } from '@/utils/server';
 import { Pinecone } from '@pinecone-database/pinecone';
 
 import { ChatBody, Message } from '@/types/chat';
@@ -117,9 +117,7 @@ const handler = async (req: Request): Promise<Response> => {
       summary: answer?.metadata?.summary,
       score: answer.score,
     }
-    const formatted_top_info = `【${top_info.title}】
-    ${top_info.summary}
-    (Score: ${top_info.score})`
+    const formatted_top_info = `【${top_info.title}】\n\n${top_info.summary}\n\n(Score: ${top_info.score})`
 
     const RAGAnswerMessage: Message = { role: 'assistant', content: formatted_top_info };
     console.log(formatted_top_info)
@@ -138,13 +136,19 @@ const handler = async (req: Request): Promise<Response> => {
         messages: [
           {
             role: 'system',
-            content: `あなたは最高の映画評論家です。ユーザーからの映画についての質問に答えてください。
-            回答はマークダウン形式で記述してください。`,
+            content: 'あなたはQAbotです。'
+              + 'これからあなたには外部の検索システムによって得られた情報と、ユーザーからの質問が与えられます。'
+              + 'あなたは得られた情報を元にユーザーの質問に回答します。'
+              + ''
+              + '### 制約'
+              + '- ユーザーの質問に答える際に、あなたは与えられた情報だけを用いて回答します。'
+              + '- 回答はマークダウン形式で記述してください。'
+              + '- 与えられた情報からユーザーに回答するのに十分な情報が得られない場合は、ユーザーに対して「回答できません」と伝えてください。'
           },
           RAGAnswerMessage,
           userMessage,
         ],
-        max_tokens: 2048,
+        max_tokens: 512,
         temperature: 1,
         stream: false,
       }),
@@ -154,7 +158,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log(secondRes)
     const answerToUser = secondRes.choices[0].message.content;
 
-    return new Response(answerToUser);
+    return new Response(answerToUser + '\n\n---\n\n### 参照した情報\n' + formatted_top_info, { status: 200 });
   } catch (error) {
     console.error(error);
     if (error instanceof OpenAIError) {
