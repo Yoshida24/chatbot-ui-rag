@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
+    "@pinecone-database/pinecone": "^1.1.2",
     "@tabler/icons-react": "^2.9.0",
     "eventsource-parser": "^0.1.0",
     "i18next": "^22.4.13",

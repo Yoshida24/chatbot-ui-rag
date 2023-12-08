@@ -19,3 +19,5 @@ export const OPENAI_ORGANIZATION =
 
 export const AZURE_DEPLOYMENT_ID =
   process.env.AZURE_DEPLOYMENT_ID || '';
+
+export const MODELS = [{ "id": "gpt-4-preview-1106", "name": "GPT-4-Preview-1106" }, { "id": "gpt-4", "name": "GPT-4" }]
