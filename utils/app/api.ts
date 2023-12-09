@@ -9,5 +9,9 @@ export const getEndpoint = (plugin: Plugin | null) => {
     return 'api/google';
   }
 
+  if (plugin.id === PluginID.PINECONE) {
+    return 'api/pinecone';
+  }
+
   return 'api/chat';
 };
