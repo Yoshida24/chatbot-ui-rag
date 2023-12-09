@@ -102,25 +102,30 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         };
         const endpoint = getEndpoint(plugin);
         let body;
+        console.log({ pluginKeys })
         if (!plugin) {
           body = JSON.stringify(chatBody);
-        } else {
+        } else if (plugin.id === 'google-search') {
           body = JSON.stringify({
             ...chatBody,
             googleAPIKey: pluginKeys
-              .find((key) => key.pluginId === 'google-search')
+              ?.find((key) => key.pluginId === 'google-search')
               ?.requiredKeys.find((key) => key.key === 'GOOGLE_API_KEY')?.value,
             googleCSEId: pluginKeys
-              .find((key) => key.pluginId === 'google-search')
+              ?.find((key) => key.pluginId === 'google-search')
               ?.requiredKeys.find((key) => key.key === 'GOOGLE_CSE_ID')?.value,
+          });
+        } else if (plugin.id === 'pinecone') {
+          body = JSON.stringify({
+            ...chatBody,
             pineconeAPIKey: pluginKeys
-              .find((key) => key.pluginId === 'pinecone')
+              ?.find((key) => key.pluginId === 'pinecone')
               ?.requiredKeys.find((key) => key.key === 'PINECONE_API_KEY')?.value,
             pineconeEnvironment: pluginKeys
-              .find((key) => key.pluginId === 'pinecone')
+              ?.find((key) => key.pluginId === 'pinecone')
               ?.requiredKeys.find((key) => key.key === 'PINECONE_ENVIRONMENT')?.value,
             pineconeIndex: pluginKeys
-              .find((key) => key.pluginId === 'pinecone')
+              ?.find((key) => key.pluginId === 'pinecone')
               ?.requiredKeys.find((key) => key.key === 'PINECONE_INDEX')?.value,
           });
         }

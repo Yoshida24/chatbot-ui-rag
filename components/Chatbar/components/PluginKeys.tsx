@@ -17,6 +17,7 @@ export const PluginKeys = () => {
     state: { pluginKeys },
   } = useContext(HomeContext);
 
+
   const { handlePluginKeyChange, handleClearPluginKey } =
     useContext(ChatbarContext);
 
@@ -32,6 +33,7 @@ export const PluginKeys = () => {
   };
 
   useEffect(() => {
+    console.log({ pluginKeys })
     const handleMouseDown = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         window.addEventListener('mouseup', handleMouseUp);
@@ -49,6 +51,9 @@ export const PluginKeys = () => {
       window.removeEventListener('mousedown', handleMouseDown);
     };
   }, []);
+
+
+  console.log({ pluginKeys })
 
   return (
     <>
@@ -92,17 +97,17 @@ export const PluginKeys = () => {
                     type="password"
                     value={
                       pluginKeys
-                        .find((p) => p.pluginId === PluginID.PINECONE)
+                        ?.find((p) => p.pluginId === PluginID.PINECONE)
                         ?.requiredKeys.find((k) => k.key === 'PINECONE_API_KEY')
                         ?.value
                     }
                     onChange={(e) => {
-                      const pluginKey = pluginKeys.find(
+                      const pluginKey = pluginKeys?.find(
                         (p) => p.pluginId === PluginID.PINECONE,
                       );
 
                       if (pluginKey) {
-                        const requiredKey = pluginKey.requiredKeys.find(
+                        const requiredKey = pluginKey?.requiredKeys.find(
                           (k) => k.key === 'PINECONE_API_KEY',
                         );
 
@@ -155,12 +160,12 @@ export const PluginKeys = () => {
                     type="text"
                     value={
                       pluginKeys
-                        .find((p) => p.pluginId === PluginID.PINECONE)
+                        ?.find((p) => p.pluginId === PluginID.PINECONE)
                         ?.requiredKeys.find((k) => k.key === 'PINECONE_ENVIRONMENT')
                         ?.value
                     }
                     onChange={(e) => {
-                      const pluginKey = pluginKeys.find(
+                      const pluginKey = pluginKeys?.find(
                         (p) => p.pluginId === PluginID.PINECONE,
                       );
 
@@ -218,12 +223,12 @@ export const PluginKeys = () => {
                     type="text"
                     value={
                       pluginKeys
-                        .find((p) => p.pluginId === PluginID.PINECONE)
+                        ?.find((p) => p.pluginId === PluginID.PINECONE)
                         ?.requiredKeys.find((k) => k.key === 'PINECONE_INDEX')
                         ?.value
                     }
                     onChange={(e) => {
-                      const pluginKey = pluginKeys.find(
+                      const pluginKey = pluginKeys?.find(
                         (p) => p.pluginId === PluginID.PINECONE,
                       );
 
@@ -276,7 +281,7 @@ export const PluginKeys = () => {
                   <button
                     className="mt-6 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
                     onClick={() => {
-                      const pluginKey = pluginKeys.find(
+                      const pluginKey = pluginKeys?.find(
                         (p) => p.pluginId === PluginID.PINECONE,
                       );
 
@@ -304,12 +309,12 @@ export const PluginKeys = () => {
                     type="password"
                     value={
                       pluginKeys
-                        .find((p) => p.pluginId === PluginID.GOOGLE_SEARCH)
+                        ?.find((p) => p.pluginId === PluginID.GOOGLE_SEARCH)
                         ?.requiredKeys.find((k) => k.key === 'GOOGLE_API_KEY')
                         ?.value
                     }
                     onChange={(e) => {
-                      const pluginKey = pluginKeys.find(
+                      const pluginKey = pluginKeys?.find(
                         (p) => p.pluginId === PluginID.GOOGLE_SEARCH,
                       );
 
@@ -363,12 +368,12 @@ export const PluginKeys = () => {
                     type="password"
                     value={
                       pluginKeys
-                        .find((p) => p.pluginId === PluginID.GOOGLE_SEARCH)
+                        ?.find((p) => p.pluginId === PluginID.GOOGLE_SEARCH)
                         ?.requiredKeys.find((k) => k.key === 'GOOGLE_CSE_ID')
                         ?.value
                     }
                     onChange={(e) => {
-                      const pluginKey = pluginKeys.find(
+                      const pluginKey = pluginKeys?.find(
                         (p) => p.pluginId === PluginID.GOOGLE_SEARCH,
                       );
 
@@ -417,7 +422,7 @@ export const PluginKeys = () => {
                   <button
                     className="mt-6 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
                     onClick={() => {
-                      const pluginKey = pluginKeys.find(
+                      const pluginKey = pluginKeys?.find(
                         (p) => p.pluginId === PluginID.GOOGLE_SEARCH,
                       );
 

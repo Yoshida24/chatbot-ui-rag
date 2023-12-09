@@ -16,10 +16,10 @@ export const config = {
   ],
 };
 
-const apiKey = process.env.PINECONE_API_KEY;
-const environment = process.env.PINECONE_ENVIRONMENT;
-const indexName = process.env.PINECONE_INDEX;
-const embeddingmodel = process.env.DEFAULT_MODEL_EMBEDDING;
+// const apiKey = process.env.PINECONE_API_KEY;
+// const environment = process.env.PINECONE_ENVIRONMENT;
+// const indexName = process.env.PINECONE_INDEX;
+// const embeddingmodel = process.env.DEFAULT_MODEL_EMBEDDING;
 
 async function getEmbedding(query: string, openaiKey: string) {
   try {

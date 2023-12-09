@@ -48,10 +48,10 @@ async function getEmbedding(query: string, openaiKey: string) {
   }
 }
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
+const handler = async (req: Request) => {
   try {
     const { model, messages, key, prompt, temperature, pineconeAPIKey, pineconeEnvironment, pineconeIndex } =
-      req.body as any
+      (await req.json()) as any
     console.log({ model, messages, key, prompt, temperature, pineconeAPIKey, pineconeEnvironment, pineconeIndex })
 
     await init((imports) => WebAssembly.instantiate(wasm, imports));
@@ -164,8 +164,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const secondRes = await answerRes.json();
     console.log(secondRes)
     const answerToUser = secondRes.choices[0].message.content;
-
-    res.status(200).json({ answer: answerToUser + '\n\n---\n\n### 参照した情報\n' + formatted_top_info });
+    
+    return new Response(JSON.stringify(answerToUser + '\n\n---\n\n### 参照した情報\n' + formatted_top_info), { status: 200 });
+    // res.json({ answer: answerToUser + '\n\n---\n\n### 参照した情報\n' + formatted_top_info });
   } catch (error) {
     console.error(error);
     if (error instanceof OpenAIError) {
