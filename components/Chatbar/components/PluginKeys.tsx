@@ -78,6 +78,218 @@ export const PluginKeys = () => {
                 <div className="mb-10 text-4xl">Plugin Keys</div>
 
                 <div className="mt-6 rounded border p-4">
+                  <div className="text-xl font-bold">Pinecone Plugin</div>
+                  <div className="mt-4 italic">
+                    Please enter your Pinecone API Key, Pinecone Environment and Pinecone Index to enable
+                    the RAG by Vector Store.
+                  </div>
+
+                  <div className="mt-6 text-sm font-bold text-black dark:text-neutral-200">
+                    Pinecone API Key
+                  </div>
+                  <input
+                    className="mt-2 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-[#40414F] dark:text-neutral-100"
+                    type="password"
+                    value={
+                      pluginKeys
+                        .find((p) => p.pluginId === PluginID.PINECONE)
+                        ?.requiredKeys.find((k) => k.key === 'PINECONE_API_KEY')
+                        ?.value
+                    }
+                    onChange={(e) => {
+                      const pluginKey = pluginKeys.find(
+                        (p) => p.pluginId === PluginID.PINECONE,
+                      );
+
+                      if (pluginKey) {
+                        const requiredKey = pluginKey.requiredKeys.find(
+                          (k) => k.key === 'PINECONE_API_KEY',
+                        );
+
+                        if (requiredKey) {
+                          const updatedPluginKey = {
+                            ...pluginKey,
+                            requiredKeys: pluginKey.requiredKeys.map((k) => {
+                              if (k.key === 'PINECONE_API_KEY') {
+                                return {
+                                  ...k,
+                                  value: e.target.value,
+                                };
+                              }
+
+                              return k;
+                            }),
+                          };
+
+                          handlePluginKeyChange(updatedPluginKey);
+                        }
+                      } else {
+                        const newPluginKey: PluginKey = {
+                          pluginId: PluginID.PINECONE,
+                          requiredKeys: [
+                            {
+                              key: 'PINECONE_API_KEY',
+                              value: e.target.value,
+                            },
+                            {
+                              key: 'PINECONE_ENVIRONMENT',
+                              value: '',
+                            },
+                            {
+                              key: 'PINECONE_INDEX',
+                              value: '',
+                            },
+                          ],
+                        };
+
+                        handlePluginKeyChange(newPluginKey);
+                      }
+                    }}
+                  />
+
+                  <div className="mt-6 text-sm font-bold text-black dark:text-neutral-200">
+                    Pinecone Environment
+                  </div>
+                  <input
+                    className="mt-2 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-[#40414F] dark:text-neutral-100"
+                    type="text"
+                    value={
+                      pluginKeys
+                        .find((p) => p.pluginId === PluginID.PINECONE)
+                        ?.requiredKeys.find((k) => k.key === 'PINECONE_ENVIRONMENT')
+                        ?.value
+                    }
+                    onChange={(e) => {
+                      const pluginKey = pluginKeys.find(
+                        (p) => p.pluginId === PluginID.PINECONE,
+                      );
+
+                      if (pluginKey) {
+                        const requiredKey = pluginKey.requiredKeys.find(
+                          (k) => k.key === 'PINECONE_ENVIRONMENT',
+                        );
+
+                        if (requiredKey) {
+                          const updatedPluginKey = {
+                            ...pluginKey,
+                            requiredKeys: pluginKey.requiredKeys.map((k) => {
+                              if (k.key === 'PINECONE_ENVIRONMENT') {
+                                return {
+                                  ...k,
+                                  value: e.target.value,
+                                };
+                              }
+
+                              return k;
+                            }),
+                          };
+
+                          handlePluginKeyChange(updatedPluginKey);
+                        }
+                      } else {
+                        const newPluginKey: PluginKey = {
+                          pluginId: PluginID.PINECONE,
+                          requiredKeys: [
+                            {
+                              key: 'PINECONE_API_KEY',
+                              value: '',
+                            },
+                            {
+                              key: 'PINECONE_ENVIRONMENT',
+                              value: e.target.value,
+                            },
+                            {
+                              key: 'PINECONE_INDEX',
+                              value: '',
+                            },
+                          ],
+                        };
+
+                        handlePluginKeyChange(newPluginKey);
+                      }
+                    }}
+                  />
+
+                  <div className="mt-6 text-sm font-bold text-black dark:text-neutral-200">
+                    Pinecone Index
+                  </div>
+                  <input
+                    className="mt-2 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-[#40414F] dark:text-neutral-100"
+                    type="text"
+                    value={
+                      pluginKeys
+                        .find((p) => p.pluginId === PluginID.PINECONE)
+                        ?.requiredKeys.find((k) => k.key === 'PINECONE_INDEX')
+                        ?.value
+                    }
+                    onChange={(e) => {
+                      const pluginKey = pluginKeys.find(
+                        (p) => p.pluginId === PluginID.PINECONE,
+                      );
+
+                      if (pluginKey) {
+                        const requiredKey = pluginKey.requiredKeys.find(
+                          (k) => k.key === 'PINECONE_INDEX',
+                        );
+
+                        if (requiredKey) {
+                          const updatedPluginKey = {
+                            ...pluginKey,
+                            requiredKeys: pluginKey.requiredKeys.map((k) => {
+                              if (k.key === 'PINECONE_INDEX') {
+                                return {
+                                  ...k,
+                                  value: e.target.value,
+                                };
+                              }
+
+                              return k;
+                            }),
+                          };
+
+                          handlePluginKeyChange(updatedPluginKey);
+                        }
+                      } else {
+                        const newPluginKey: PluginKey = {
+                          pluginId: PluginID.PINECONE,
+                          requiredKeys: [
+                            {
+                              key: 'PINECONE_API_KEY',
+                              value: '',
+                            },
+                            {
+                              key: 'PINECONE_ENVIRONMENT',
+                              value: '',
+                            },
+                            {
+                              key: 'PINECONE_INDEX',
+                              value: e.target.value,
+                            },
+                          ],
+                        };
+
+                        handlePluginKeyChange(newPluginKey);
+                      }
+                    }}
+                  />
+
+                  <button
+                    className="mt-6 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
+                    onClick={() => {
+                      const pluginKey = pluginKeys.find(
+                        (p) => p.pluginId === PluginID.PINECONE,
+                      );
+
+                      if (pluginKey) {
+                        handleClearPluginKey(pluginKey);
+                      }
+                    }}
+                  >
+                    Clear Pinecone Plugin Keys
+                  </button>
+                </div>
+
+                <div className="mt-6 rounded border p-4">
                   <div className="text-xl font-bold">Google Search Plugin</div>
                   <div className="mt-4 italic">
                     Please enter your Google API Key and Google CSE ID to enable

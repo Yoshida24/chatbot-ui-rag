@@ -408,8 +408,11 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
   const googleApiKey = process.env.GOOGLE_API_KEY;
   const googleCSEId = process.env.GOOGLE_CSE_ID;
+  const pineconeApiKey = process.env.PINECONE_API_KEY;
+  const pineconeEnvironment = process.env.PINECONE_ENVIRONMENT;
+  const pineconeIndex = process.env.PINECONE_INDEX;
 
-  if (googleApiKey && googleCSEId) {
+  if (googleApiKey && googleCSEId && pineconeApiKey && pineconeEnvironment && pineconeIndex) {
     serverSidePluginKeysSet = true;
   }
 

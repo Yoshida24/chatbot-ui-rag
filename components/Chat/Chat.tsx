@@ -113,6 +113,15 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             googleCSEId: pluginKeys
               .find((key) => key.pluginId === 'google-search')
               ?.requiredKeys.find((key) => key.key === 'GOOGLE_CSE_ID')?.value,
+            pineconeAPIKey: pluginKeys
+              .find((key) => key.pluginId === 'pinecone')
+              ?.requiredKeys.find((key) => key.key === 'PINECONE_API_KEY')?.value,
+            pineconeEnvironment: pluginKeys
+              .find((key) => key.pluginId === 'pinecone')
+              ?.requiredKeys.find((key) => key.key === 'PINECONE_ENVIRONMENT')?.value,
+            pineconeIndex: pluginKeys
+              .find((key) => key.pluginId === 'pinecone')
+              ?.requiredKeys.find((key) => key.key === 'PINECONE_INDEX')?.value,
           });
         }
         const controller = new AbortController();
